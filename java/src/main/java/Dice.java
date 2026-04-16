@@ -1,32 +1,21 @@
 import java.util.Random;
 
 public class Dice {
-    private int value;
+    private int numberOfDice;
+    private int sides;
     private Random random;
 
-    public Dice() {
-        random = new Random();
+    public Dice(int numberOfDice, int sides) {
+        this.numberOfDice = numberOfDice;
+        this.sides = sides;
+        this.random = new Random();
     }
 
-    public void roll() {
-        value = random.nextInt(6) + 1; // 1–6
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-public class Main {
-    public static void main(String[] args) {
-        Dice dice = new Dice();
-        dice.roll();
-        System.out.println("Rolled: " + dice.getValue());
+    public int roll() {
+        int total = 0;
+        for (int i = 0; i < numberOfDice; i++) {
+            total += random.nextInt(sides) + 1; // 1 to sides
+        }
+        return total;
     }
 }
-
-while (true) {
-    int roll = dice.roll();
-    System.out.println("You rolled: " + roll);
-}
-}
-
