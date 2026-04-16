@@ -17,10 +17,19 @@ public class Simulation {
     }
 
     public void printResults() {
-        for (int sum = 2; sum <= 12; sum++) {
-            System.out.println(sum + ": " + results.getBin(sum));
-        }
+    int total = results.getTotalRolls();
+
+    System.out.println("Simulation of 2 dice tossed for " + total + " times.\n");
+
+    for (int sum = 2; sum <= 12; sum++) {
+        int count = results.getBin(sum);
+
+        double percentage = ((double) count / total) * 100;
+
+        System.out.printf("%2d: %7d (%.2f%%)%n",
+                sum, count, percentage);
     }
+}
 
     public static void main(String[] args) {
         Simulation sim = new Simulation(2, 1000000);
