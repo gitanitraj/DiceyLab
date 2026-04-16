@@ -17,18 +17,14 @@ public class Simulation {
     }
 
     public void printResults() {
-        System.out.println("Simulation results:");
-        for (int sum = diceRollMin(); sum <= diceRollMax(); sum++) {
-            int count = results.getBin(sum);
-            System.out.println(sum + ": " + count);
+        for (int sum = 2; sum <= 12; sum++) {
+            System.out.println(sum + ": " + results.getBin(sum));
         }
     }
 
-    private int diceRollMin() {
-        return 2; // min for 2 dice
-    }
-
-    private int diceRollMax() {
-        return 12; // max for 2 dice
+    public static void main(String[] args) {
+        Simulation sim = new Simulation(2, 1000000);
+        sim.runSimulation();
+        sim.printResults();
     }
 }
