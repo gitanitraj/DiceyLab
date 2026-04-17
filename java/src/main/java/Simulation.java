@@ -19,15 +19,35 @@ public class Simulation {
     public void printResults() {
     int total = results.getTotalRolls();
 
-    System.out.println("Simulation of 2 dice tossed for " + total + " times.\n");
+    System.out.println("***");
+    System.out.println("Simulation of 2 dice tossed for " + total + " times.");
+    System.out.println("***\n");
+
+    // Find max count for scaling
+    int maxCount = 0;
+    for (int sum = 2; sum <= 12; sum++) {
+        int count = results.getBin(sum);
+        if (count > maxCount) {
+            maxCount = count;
+        }
+    }
+
+    int maxStars = 50; // width of histogram
 
     for (int sum = 2; sum <= 12; sum++) {
         int count = results.getBin(sum);
+        double percentage = (double) count / total;
 
-        double percentage = ((double) count / total) * 100;
+        // Scale stars relative to max
+        int starCount = (int) (((double) count / maxCount) * maxStars);
 
-        System.out.printf("%2d: %7d (%.2f%%)%n",
-                sum, count, percentage);
+        StringBuilder stars = new StringBuilder();
+        for (int i = 0; i < starCount; i++) {
+            stars.append("*");
+        }
+
+        System.out.printf("%2d : %8d: %.2f %s%n",
+                sum, count, percentage, stars.toString());
     }
 }
 
